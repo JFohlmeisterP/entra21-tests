@@ -17,7 +17,7 @@ namespace entra21_tests
         }
 
         // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 1b,
-        // então a aplicação deverá retornar todos os números de 1 a 10 de forma decrescente
+        // então a aplicação deverá retornar todos os números de 1 a 10 de forma decrescente/ TESTE TESTE TESTE
         public int[] Exercise1B()
         {
             int[] numbers = new int[10];
