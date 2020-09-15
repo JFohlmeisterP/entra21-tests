@@ -93,5 +93,29 @@ namespace entra21_tests
             // Deve / Asserções
             Assert.Equal(5050, result);
         }
+
+        // [Fact]
+        // public void should_return_8_when_receive_4_and_6_and_8()
+        // {
+        //     // Dado / Setup
+        //     var exercises = new Exercises();
+
+        //     // Quando / Ação
+        //     double result = exercises.Exercise4(4, 6, 8);
+
+        //     // Deve / Asserções
+        //     Assert.Equal(8, result);
+        // }
+
+        [Theory]
+        [InlineData(10, 5)]
+        public void should_return_true_or_false_when_receive_x_and_y_values(int x, int y)
+        {
+            var exercises = new Exercises();
+
+            var result = exercises.Exercise8(x, y);
+
+            Assert.Equal(true, result);
+        }
     }
 }
