@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace entra21_tests
 {
@@ -57,9 +58,80 @@ namespace entra21_tests
             return sum;
 		}
 
+        // public int[] Exercise3(int[] numbers)
+        // {
+        //     // Quando o usuário chamar o exercício 3, a aplicação deverá retornar todos os números ímpares menores que 200.
+        //     numbers = new int[100];
+
+        //     for(var i = 1; i < 200; i++)
+        //     {
+        //         if(i % 2 == 1)
+        //         {
+        //             for(var j = 0; j < numbers.Length; j++)
+        //             {
+        //                 numbers[j] = i;
+        //             }
+        //         }
+
+        //     }
+
+        //     return numbers;
+
+        // }
+
+        public double Exercise4(List<int> ages)
+        {
+            // Deve retornar a media de idade da turma assim que o usuario finalizar o cadastro de idades
+
+            double sum = 0.0;
+
+            var answers = ages.Count;
+
+            foreach(var item in ages)
+            {
+                sum += item;
+            }
+
+            var average = (sum/answers);
+
+            return average;
+
+        }
+
+        public double Exercise5(List<int> ages)
+        {
+            var counter = 0;
+
+            foreach(var item in ages)
+            {
+                if(item >= 18 && item <= 35)
+                {
+                    counter++;
+                }
+            }
+
+            var result = (counter * 100) / ages.Count;
+
+            return result;
+
+        }
+
+        public void Exercise6()
+        {
+            
+        }
+
+        public double Exercise7(int anos, int cigarrosDia, double valorCarteira, int cigarrosCarteira)
+        {
+            double gasto = (((anos * 365) * cigarrosDia) * valorCarteira) / cigarrosCarteira;
+
+            return gasto;
+            
+        }
+
+        public bool Exercise8(int x, int y)
         // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 8,
         // então a aplicação deverá retornar true ou false, dependendo do input do usuário para x e y.
-        public bool Exercise8(int x, int y)
         {
             var answer = false;
 
@@ -75,28 +147,64 @@ namespace entra21_tests
             return answer;
         }
 
-        static void Exercise3()
+        public bool Exercise9(double n1, double n2, double n3)
         {
-            // Quando o usuário chamar o exercício 3, a aplicação deverá retornar todos os números ímpares menores que 200.
-            var numbers = new int[100];
+            bool primeiroMaior = false;
 
-            for(var i = 0; i < 200; i++)
+            if (n2 + n3 < n1)
             {
-                if(numbers[i] % ]
+                primeiroMaior = true;
+            }
+            else
+            {
+                primeiroMaior = false;
             }
 
-            Console.WriteLine("Ímpares menores que 200:");
+            return primeiroMaior;
 
-            while (counter < 200)
-            {
-                if (counter % 2 == 1)
-                {
-                    Console.WriteLine(counter);
-                }
-                counter++;
-            }
         }
 
+        public void Exercise10()
+        {
+            
+        }
 
+        public void Exercise11()
+        {
+            
+        }
+        public void Exercise12()
+        {
+            
+        }
+
+        public void Exercise13()
+        {
+            
+        }
+
+        public void Exercise14()
+        {
+            
+        }
+
+        public void Exercise15()
+        {
+            
+        }
+
+        public void Exercise16()
+        {
+            
+        }
+        public void Exercise17()
+        {
+            
+        }
+
+        public void Exercise18()
+        {
+            
+        }
     }
 }

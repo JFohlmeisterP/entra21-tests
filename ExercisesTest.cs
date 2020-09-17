@@ -1,3 +1,4 @@
+using System.Linq;
 using Xunit;
 
 namespace entra21_tests
@@ -108,6 +109,40 @@ namespace entra21_tests
         // }
 
         [Theory]
+        [InlineData(new int[3]{4, 6, 8}, 6)]
+        public void shoud_return_an_average_of_ages(int[] ages, double expected)
+        {
+            var exercises = new Exercises();
+
+            double result = exercises.Exercise4(ages.ToList());
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(new int[5]{18, 20, 16, 23, 30}, 80)]
+        public void shoud_return_the_average_of_ages_between_18_and_35(int[] ages, double expected)
+        {
+            var exercises = new Exercises();
+
+            double result = exercises.Exercise5(ages.ToList());
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(15, 13, 20.50, 10, 145908.75)]
+        public void deve_retornar_o_gasto_total_em_cigarros(int anos, int cigarrosDia, double valorCarteira, int cigarrosCarteira, double expected)
+        {
+            var exercises = new Exercises();
+
+            double gasto = exercises.Exercise7(anos, cigarrosDia, valorCarteira, cigarrosCarteira);
+
+            Assert.Equal(expected, gasto);
+        }
+
+
+        [Theory]
         [InlineData(10, 5)]
         public void should_return_true_or_false_when_receive_x_and_y_values(int x, int y)
         {
@@ -117,5 +152,17 @@ namespace entra21_tests
 
             Assert.Equal(true, result);
         }
+
+        [Theory]
+        [InlineData(10, 2, 7)]
+        public void deve_retornar_se_n1_é_maior_que_a_soma_de_n2_e_n3(double n1, double n2, double n3)
+        {
+            var exercises = new Exercises();
+
+            var primeiroMaior = exercises.Exercise9(n1, n2, n3);
+
+            Assert.Equal(true, primeiroMaior);
+        }
+    
     }
 }
