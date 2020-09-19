@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace entra21_tests
 {
@@ -164,10 +165,23 @@ namespace entra21_tests
 
         }
 
-        public void Exercise10()
-        {
-            
-        }
+        // public int Exercise10(double n1, double n2)
+        // {
+        //     if (n1 == n2)
+        //     {
+        //         System.Console.WriteLine("A = B");
+        //         // retornar bool
+        //     }
+        //     else if (n1 > n2)
+        //     {
+        //         System.Console.WriteLine($"O maior número é: {a}");
+        //         // retornar int
+        //     }
+        //     else
+        //     {
+                
+        //     }
+        // }
 
         public void Exercise11()
         {
@@ -197,14 +211,32 @@ namespace entra21_tests
         {
             
         }
-        public void Exercise17()
-        {
-            
-        }
+
+        public IEnumerable<int> Exercise17(int number)
+		{
+            // Imprimir a tabuada de qualquer número fornecido pelo usuário.
+            // DADO que a aplicação esteja pronta, 
+            // QUANDO o usuário informar um número
+            // DEVE retornar a tabuada de 1 a 10
+
+            var multiplicationTable = new List<int>(){
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            };
+
+            return multiplicationTable.Select(item => item * number);
+		}
 
         public void Exercise18()
         {
             
+        }
+
+        public IEnumerable<int> ExerciseTesteSelect(int[] numbers)
+        {
+            // Quando o usuário informar 10 inteiros, multiplicar por 5
+            // Retornar a lista dos inteiros multiplicados por 5
+            return numbers.Select(item => item * 5);
+
         }
     }
 }

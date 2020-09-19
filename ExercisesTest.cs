@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -162,6 +163,35 @@ namespace entra21_tests
             var primeiroMaior = exercises.Exercise9(n1, n2, n3);
 
             Assert.Equal(true, primeiroMaior);
+        }
+
+        [Theory]
+        [InlineData(6, new int[10]{6, 12, 18, 24, 30, 36, 42, 48, 54, 60})]
+        [InlineData(5, new int[10]{5, 10, 15, 20, 25, 30, 35, 40, 45, 50})]
+        public void should_return_the_input_multiplied_by_1_to_10(int number, int[] expectedResult)
+        {
+            // Dado / Setup
+            var exercises = new Exercises();
+            
+            // Quando / Ação
+            var result = exercises.Exercise17(number);
+
+            // Deve / Asserções
+            Assert.Equal(result, expectedResult);
+        }
+
+        [Theory]
+        [InlineData(new int[10]{1,2,3,4,5,6,7,8,9,10}, new int[10]{5,10,15,20,25,30,35,40,45,50})]
+        public void deve_retornar_uma_lista_do_resultado_do_input_multiplicado_por_5(int[] numbers, int[] resultadoEsperado)
+        {
+            // Dado / Setup
+            var exercises = new Exercises();
+            
+            // Quando / Ação
+            var result = exercises.ExerciseTesteSelect(numbers);
+
+            // Deve / Asserções
+            Assert.Equal(result, resultadoEsperado);
         }
     
     }
