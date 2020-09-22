@@ -1,6 +1,6 @@
 # entra21-tests
 
-### Méotodos
+### Métodos
 #### Definindo o retorno
     // int é o tipo referente ao valor retornado
     public int Exercise()
