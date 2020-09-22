@@ -95,20 +95,7 @@ namespace entra21_tests
             // Deve / Asserções
             Assert.Equal(5050, result);
         }
-
-        // [Fact]
-        // public void should_return_8_when_receive_4_and_6_and_8()
-        // {
-        //     // Dado / Setup
-        //     var exercises = new Exercises();
-
-        //     // Quando / Ação
-        //     double result = exercises.Exercise4(4, 6, 8);
-
-        //     // Deve / Asserções
-        //     Assert.Equal(8, result);
-        // }
-
+        
         [Theory]
         [InlineData(new int[3]{4, 6, 8}, 6)]
         public void shoud_return_an_average_of_ages(int[] ages, double expected)
@@ -210,6 +197,17 @@ namespace entra21_tests
         }
 
         [Theory]
+        [InlineData(7, 9, 2, "2, 7, 9")]
+        public void deve_retornar_uma_string_com_os_numeros_em_ordem_crescente(double a, double b, double c, string outputEsperado)
+        {
+            var exercises = new Exercises();
+
+            var result = exercises.Exercise14(a, b, c);
+
+            Assert.Equal(outputEsperado, result);
+        }
+
+        [Theory]
         [InlineData(new int[10]{2,3,4,1,5,6,8,7,9,10}, new int[2]{3,2})]
         public void deve_retornar_um_array_com_a_quantidade_de_multiplos_de_3_e_5(int[] numbers, int[] outputEsperado)
         {
@@ -218,6 +216,17 @@ namespace entra21_tests
             var multiplos = exercises.Exercise15(numbers.ToList());
 
             Assert.Equal(outputEsperado, multiplos);
+        }
+
+        [Theory]
+        [InlineData(1300.00, 975.00)]
+        public void deve_retornar_o_valor_do_salario_liquido_ao_receber_o_salario_bruto(double salario, double outputEsperado)
+        {
+            var exercises = new Exercises();
+
+            var salarioliquido = exercises.Exercise16(salario);
+
+            Assert.Equal(outputEsperado, salarioliquido);
         }
 
         [Theory]
@@ -233,6 +242,20 @@ namespace entra21_tests
 
             // Deve / Asserções
             Assert.Equal(result, expectedResult);
+        }
+
+        [Theory]
+        [InlineData(11, 14.30 )]
+        public void deve_retornar_o_preco_das_macas_de_acordo_com_o_input(int apple, double valorEsperado)
+        {
+            // Dado / Setup
+            var exercises = new Exercises();
+            
+            // Quando / Ação
+            var total = exercises.Exercise18(apple);
+
+            // Deve / Asserções
+            Assert.Equal(total, valorEsperado);
         }
 
         [Theory]

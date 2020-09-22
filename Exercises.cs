@@ -59,27 +59,6 @@ namespace entra21_tests
             return sum;
 		}
 
-        // public int[] Exercise3(int[] numbers)
-        // {
-        //     // Quando o usuário chamar o exercício 3, a aplicação deverá retornar todos os números ímpares menores que 200.
-        //     numbers = new int[100];
-
-        //     for(var i = 1; i < 200; i++)
-        //     {
-        //         if(i % 2 == 1)
-        //         {
-        //             for(var j = 0; j < numbers.Length; j++)
-        //             {
-        //                 numbers[j] = i;
-        //             }
-        //         }
-
-        //     }
-
-        //     return numbers;
-
-        // }
-
         public double Exercise4(List<int> ages)
         {
             // Deve retornar a media de idade da turma assim que o usuario finalizar o cadastro de idades
@@ -228,9 +207,44 @@ namespace entra21_tests
 
         }
 
-        public void Exercise14()
+        public string Exercise14(double a, double b, double c)
         {
+
+            if (a > b)
+            {
+                if (b > c)
+                {
+                    return $"{c}, {b}, {a}";
+                }
+                else
+                {
+                    if (a > c)
+                    {
+                        return $"{b}, {c}, {a}";
+                    }
+                    else
+                    {
+                        return $"{b}, {a}, {c}";
+                    }
+                }
+            }
+            else if (b > c)
+            {
             
+                if (a > c)
+                {
+                    return $"{c}, {a}, {b}";
+                }
+                else
+                {
+                    return $"{a}, {c}, {b}";
+                }
+                
+            }
+            else 
+            {
+                return $"{a}, {b}, {c}";
+            }
         }
 
         public int[] Exercise15(List<int> numbers)
@@ -258,9 +272,25 @@ namespace entra21_tests
 
         }
 
-        public void Exercise16()
+        public double Exercise16(double salario)
         {
+            var salarioliquido = 0.0;
             
+            if (salario > 600 && salario <= 1200)
+            {
+                salarioliquido = salario - (salario * 0.2);
+            }
+            else if (salario > 1200 && salario <= 2000)
+            {
+                salarioliquido = salario - (salario * 0.25);
+            }
+            else
+            {
+                salarioliquido = salario - (salario * 0.3);
+            }
+
+            return salarioliquido;
+
         }
 
         public IEnumerable<int> Exercise17(int number)
@@ -277,9 +307,22 @@ namespace entra21_tests
             return multiplicationTable.Select(item => item * number);
 		}
 
-        public void Exercise18()
+        public double Exercise18(int apple)
         {
+            var price = 0.0;
             
+            if (apple < 12)
+            {
+                price = 1.30;
+            }
+            else if (apple >= 12)
+            {
+                price = 1.00;
+            }
+
+            double total = apple + price;
+            
+            return total;
         }
 
         public IEnumerable<int> ExerciseTesteSelect(int[] numbers)
