@@ -165,36 +165,67 @@ namespace entra21_tests
 
         }
 
-        // public int Exercise10(double n1, double n2)
-        // {
-        //     if (n1 == n2)
-        //     {
-        //         System.Console.WriteLine("A = B");
-        //         // retornar bool
-        //     }
-        //     else if (n1 > n2)
-        //     {
-        //         System.Console.WriteLine($"O maior número é: {a}");
-        //         // retornar int
-        //     }
-        //     else
-        //     {
-                
-        //     }
-        // }
-
-        public void Exercise11()
+        public string Exercise10(int A, int B)
         {
             
-        }
-        public void Exercise12()
-        {
+            if (A == B)
+            {
+                return $"A = B";
+            }
+            else if (A > B)
+            {
+                return $"A é maior";
+            }
+            else
+            {
+                return $"B é maior";
+            }
             
         }
 
-        public void Exercise13()
+        public string Exercise11(int a, int b)
         {
+            int quociente = 0;
+
+            if (b != 0)
+            {
+                quociente = a / b;
+                return $"{quociente}";
+            }
+            else
+            {
+                return $"Divisão por zero.";
+            }
+        }
+        public double Exercise12(List<double> numbers)
+        {
+            var soma = 0.0;
             
+            foreach(var item in numbers)
+            {
+                if(item % 2 == 0)
+                {
+                    soma += item;
+                }
+            }
+
+            return soma;
+        }
+        
+        public int Exercise13(List<int> numbers)
+        {
+            var maior = 0;
+
+            foreach(var item in numbers)
+            {
+                if (item > maior)
+                {
+                    maior = item;
+                }
+            }
+
+            return maior;
+
         }
 
         public void Exercise14()
@@ -202,9 +233,29 @@ namespace entra21_tests
             
         }
 
-        public void Exercise15()
+        public int[] Exercise15(List<int> numbers)
         {
-            
+            var multiplos = new int[2];
+            var multiplos3 = 0;
+            var multiplos5 = 0;
+
+            foreach(var item in numbers)
+            {
+                if (item % 3 == 0)
+                {
+                    multiplos3++;
+                }
+                else if (item % 5 == 0)
+                {
+                    multiplos5++;
+                }
+            }
+
+            multiplos[0] = multiplos3;
+            multiplos[1] = multiplos5;
+
+            return multiplos;
+
         }
 
         public void Exercise16()

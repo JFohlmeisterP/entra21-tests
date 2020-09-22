@@ -58,7 +58,7 @@ namespace entra21_tests
         }
         
         [Fact]
-        public void should_return_an_array_from_1_to_10_but_only_even()
+        public void should_return_an_array_from_1_to_10_but_only_even_numbers()
         {
             // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 1c,
             // então a aplicação deverá retornar os números de 1 a 10, mas somente os pares
@@ -163,6 +163,61 @@ namespace entra21_tests
             var primeiroMaior = exercises.Exercise9(n1, n2, n3);
 
             Assert.Equal(true, primeiroMaior);
+        }
+
+        [Theory]
+        [InlineData(10, 5, "A é maior")]
+        public void deve_retornar_uma_string_informando_se_A_e_B_sao_iguais_ou_qual_o_maior_numero(int A, int B, string expected)
+        {
+            var exercises = new Exercises();
+
+            var result = exercises.Exercise10(A, B);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(50, 2, "25")]
+        public void deve_retornar_uma_string_informando_o_quociente_da_divisao_de_a_por_b_ou_informando_divisao_por_zero(int a, int b, string expected)
+        {
+            var exercises = new Exercises();
+
+            var result = exercises.Exercise11(a, b);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(new double[4]{1,4,3,10}, 14)]
+        public void deve_retornar_a_soma_dos_numeros_pares_de_um_array(double[] numbers, double expected)
+        {
+            var exercises = new Exercises();
+
+            var soma = exercises.Exercise12(numbers.ToList());
+
+            Assert.Equal(expected, soma);
+        }
+
+        [Theory]
+        [InlineData(new int[10]{2,3,4,1,5,6,8,7,9,10}, 10)]
+        public void deve_retornar_o_maior_numero_da_lista(int[] numbers, int outputEsperado)
+        {
+            var exercises = new Exercises();
+
+            var maior = exercises.Exercise13(numbers.ToList());
+
+            Assert.Equal(outputEsperado, maior);
+        }
+
+        [Theory]
+        [InlineData(new int[10]{2,3,4,1,5,6,8,7,9,10}, new int[2]{3,2})]
+        public void deve_retornar_um_array_com_a_quantidade_de_multiplos_de_3_e_5(int[] numbers, int[] outputEsperado)
+        {
+            var exercises = new Exercises();
+
+            var multiplos = exercises.Exercise15(numbers.ToList());
+
+            Assert.Equal(outputEsperado, multiplos);
         }
 
         [Theory]
