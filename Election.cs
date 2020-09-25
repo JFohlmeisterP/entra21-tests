@@ -10,12 +10,12 @@ namespace entra21_tests
         // Sempre em PascalCase
         public List<(Guid id, string name, int votes, string cpf)> Candidates { get; set; }
         
-        public bool CreateCandidates(List<string> candidateNames, string password)
+        public bool CreateCandidates(List<(string name, string cpf)> candidateData, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                Candidates = candidateNames.Select(candidateName => {
-                    return (Guid.NewGuid(), candidateName, 0, "");
+                Candidates = candidateData.Select(candidate => {
+                    return (Guid.NewGuid(), candidate.name, 0, candidate.cpf);
                 }).ToList();
 
                 return true;
@@ -34,10 +34,8 @@ namespace entra21_tests
             return Candidates.First(x => x.name == name).id;
         }
 
-        // public Guid GetCandidatesWithSameNamesId(string name)
-        // {
-        //     return Candidates.Where();
-        // }
+         public List<Guid> GetCandidatesWithSameNamesId(string name) => 
+            Candidates.Where(candidates => candidates.name == name).Select(candidate => candidate.id).ToList();
 
         public Guid GetCandidatesIdByCPF(string cpf)
         {

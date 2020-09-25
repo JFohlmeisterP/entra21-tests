@@ -245,7 +245,7 @@ namespace entra21_tests
         }
 
         [Theory]
-        [InlineData(11, 14.30 )]
+        [InlineData(11, 12.30 )]
         public void deve_retornar_o_preco_das_macas_de_acordo_com_o_input(int apple, double valorEsperado)
         {
             // Dado / Setup
