@@ -8,7 +8,7 @@ namespace entra21_tests
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        public List<(Guid id, string name, int votes, string cpf)> Candidates { get; set; }
+        public List<(Guid id, string name, int votes, string cpf)> Candidates { get; private set; }
         
         public bool CreateCandidates(List<(string name, string cpf)> candidateData, string password)
         {
@@ -34,10 +34,10 @@ namespace entra21_tests
             return Candidates.First(x => x.name == name).id;
         }
 
-         public List<Guid> GetCandidatesWithSameNamesId(string name) => 
-            Candidates.Where(candidates => candidates.name == name).Select(candidate => candidate.id).ToList();
+         public List<(Guid id, string name, int votes, string cpf)> GetCandidatesIdWithSameNames(string name) => 
+            Candidates.Where(candidates => candidates.name == name).ToList();
 
-        public Guid GetCandidatesIdByCPF(string cpf)
+        public Guid GetCandidateIdByCPF(string cpf)
         {
             return Candidates.First(x => x.cpf == cpf).id;
         }

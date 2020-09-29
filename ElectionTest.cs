@@ -69,7 +69,7 @@ namespace entra21_tests
            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("José", "852.710.650-73")};
            election.CreateCandidates(candidateData, "Pa$$w0rd");
 
-           var candidate = election.GetCandidatesIdByCPF("852.710.650-73");
+           var candidate = election.GetCandidateIdByCPF("852.710.650-73");
 
            Assert.Equal(candidate, election.Candidates[1].id);
         }
@@ -86,7 +86,7 @@ namespace entra21_tests
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
             // Quando / Ação
-            var candidatesSameName = election.GetCandidatesWithSameNamesId("josé");
+            var candidatesSameName = election.GetCandidatesIdWithSameNames("josé");
 
             // Deve / Asserções
             Assert.NotEqual(candidatesSameName[0], candidatesSameName[1]);
