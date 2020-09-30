@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace entra21_tests
@@ -65,6 +66,52 @@ namespace entra21_tests
         //     // Deve / Asserções
         //     Assert.Equal(message, menssagemEsperada);
             
+        // }
+
+        [Theory]
+        [InlineData(new double[15]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, new double[4]{8,7,1,7})]
+        public void deve_retornar_a_média_final_e_quantos_estão_acima_abaixo_e_na_média_ao_receber_input(double[] a, double[] expectedResult)
+        {
+            var arrays = new ArraysExercises();
+
+            var result = arrays.ExerciseArray5(a);
+
+            Assert.Equal(result, expectedResult);
+        }
+
+        [Theory]
+        [InlineData(new int[10]{1,2,3,4,5,6,7,8,9,10}, new int[10]{10,9,8,7,6,5,4,3,2,1}, new int[10]{10,9,8,7,6,5,4,3,2,1})]
+        public void deve_retornar_o_array_b_do_input(int[] a, int[] b , int[] expectedResult)
+        {
+            var arrays = new ArraysExercises();
+
+            var result = arrays.ExerciseArray1List2(a, b);
+
+            Assert.Equal(result, expectedResult);
+        }
+
+        [Theory]
+        [InlineData(new int[10]{1,1,2,3,4,5,6,7,8,9} , "Sim, existem números repetidos.")]
+        [InlineData(new int[10]{1,2,3,4,5,6,7,8,9,10} , "Não existem números repetidos.")]
+        [InlineData(new int[10]{1,2,3,4,5,6,7,8,9,5} , "Sim, existem números repetidos.")]
+        public void deve_retornar_uma_string_informando_se_há_ou_não_elementos_repetidos_no_array_input(int[] a, string expectedMessage)
+        {
+            var arrays = new ArraysExercises();
+
+            var result = arrays.ExerciseArray2List2(a);
+
+            Assert.Equal(result, expectedMessage);
+        }
+
+        // [Theory]
+        // [InlineData()]
+        // public void lala(string[] sex, string[] answer, double[] expectedResult)
+        // {
+        //     var arrays = new ArraysExercises();
+
+        //     var result = arrays.ExerciseArray3List2(sex, answer);
+
+        //     Assert.Equal(result, expectedResult);   
         // }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -93,24 +94,124 @@ namespace entra21_tests
 
         // }
 
-        public void ExerciseArray5()
+        public double[] ExerciseArray5(double[] a)
         {
+            // 5- Receber uma array com 15 elementos, retornar média aritmética e quantos elementos estão abaixo, 
+            // acima e na média.
+
+            double soma = 0.0;
+            double mediaAritmetica = 0.0;
+            int acimaDaMedia = 0;
+            int naMedia = 0;
+            int abaixoDaMedia = 0;
+
+            for (var i = 0; i < a.Length; i++)
+            {
+                soma += a[i];
+                mediaAritmetica = soma / a.Length;
+            }
+
+            for (var i = 0; i < a.Length; i++)
+            {
+                if (a[i] > mediaAritmetica)
+                {
+                    acimaDaMedia++;
+                }
+                else if (a[i] == mediaAritmetica)
+                {
+                    naMedia++;
+                }
+                else
+                {
+                    abaixoDaMedia++;
+                }
+            }
+
+            var result = new double[4];
+
+            result[0] = mediaAritmetica;
+            result[1] = acimaDaMedia;
+            result[2] = naMedia;
+            result[3] = abaixoDaMedia;
+
+            return result;
 
         }
 
-        public void ExerciseArray6()
+        public int[] ExerciseArray1List2(int[] a, int[] b)
         {
+            // Popule dois vetores com 10 valores cada. Após esta operação, troque o conteúdo dos vetores.
+            
+            Array.Clear(a, 0, a.Length);
+
+            for(var i = 0; i < a.Length; i++)
+            {
+                a[i] = b[i];
+            }
+
+            var result = new int[10];
+
+            for(var i = 0; i < result.Length; i++)
+            {
+                result[i] = a[i];
+            }
+
+            return result;
 
         }
 
-        public void ExerciseArray7()
+        public string ExerciseArray2List2(int[] a)
         {
+            // Informar se há elementos repetidos, ou não, dentro do array input.
 
+            var quantidadeRepetidos = a.Length - a.Distinct().Count();
+
+            var message = quantidadeRepetidos > 0 ? "Sim, existem números repetidos." : "Não existem números repetidos.";
+            
+            return message;
         }
 
-        public void ExerciseArray8()
-        {
+        // public double[] ExerciseArray3List2(string[] sex, string[] answer)
+        // {
+        //     // Conforme inpu, retornar:
+        //     // • O número de pessoas que responderam sim;
+        //     // • O número de pessoas que responderam não;
+        //     // • A porcentagem de pessoas do sexo feminino que responderam sim;
+        //     // • A porcentagem de pessoas do sexo masculino que responderam não;
+            
+        //     var yes = 0;
+        //     var no = 0;
+        //     var femaleYes = 0.0;
+        //     var maleNo = 0.0;
 
-        }
+        //     for(var i = 0; i < 10; i++)
+        //     {   
+        //         if (answer[i] == "SIM")
+        //         {
+        //             yes++;
+        //         }
+        //         else
+        //         {
+        //             no++;
+        //         }
+
+        //         if(sex[i] == "F" && answer[i] == "SIM")
+        //         {
+        //             femaleYes++;
+        //         }
+        //         else if(sex[i] == "M" && answer[i] == "NAO")
+        //         {
+        //             maleNo++;
+        //         }
+        //     }
+
+        //     var result = new double[];
+
+        //     result[0] = yes;
+        //     result[1] = no;
+        //     result[2] = femaleYes;
+        //     result[3] = maleNo;
+
+        // }
     }
 }
