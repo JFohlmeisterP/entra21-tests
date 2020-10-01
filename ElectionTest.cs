@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace entra21_tests
@@ -27,20 +28,18 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            string candidate = "José";
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("José", "852.710.650-73")};
+            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
 
-            // Quando / Ação
-
-            // Estamos acessando o MÉTODO CreateCandidates do OBJETO election
             var created = election.CreateCandidates(candidateData, "Pa$$w0rd");
 
-            // Deve / Asserções
+            var candidateJose = election.GetCandidateIdByName("José");
+            var candidateAna = election.GetCandidateIdByName("Ana");
+
             Assert.True(created);
             
             // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
             Assert.Equal(2, election.Candidates.Count);
-            Assert.Equal(candidate, election.Candidates[0].name);
+            Assert.NotEqual(candidateJose, candidateAna);
         }
 
         [Fact]
@@ -54,8 +53,8 @@ namespace entra21_tests
             election.CreateCandidates(candidateData, "Pa$$w0rd");
             
             // Quando / Ação
-            var candidateJose = election.GetCandidateIdByName("José");
-            var candidateAna = election.GetCandidateIdByName("Ana");
+            var candidateJose = election.Candidates.ElementAt(0).id;
+            var candidateAna = election.Candidates.ElementAt(1).id;
 
             // Deve / Asserções
             Assert.NotEqual(candidateAna, candidateJose);
@@ -71,7 +70,7 @@ namespace entra21_tests
 
            var candidate = election.GetCandidateIdByCPF("852.710.650-73");
 
-           Assert.Equal(candidate, election.Candidates[1].id);
+           Assert.Equal(candidate, election.Candidates.ElementAt(1).id);
         }
 
         [Fact]
@@ -82,11 +81,11 @@ namespace entra21_tests
             // OBJETO election
             var election = new Election();
 
-            var candidates = new List<(string name, string cpf)> { ("josé", "123.456.761-00"), ("josé", "856.876.32-23") };
+            var candidates = new List<(string name, string cpf)> { ("José", "123.456.761-00"), ("José", "856.876.32-23") };
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
             // Quando / Ação
-            var candidatesSameName = election.GetCandidatesIdWithSameNames("josé");
+            var candidatesSameName = election.GetCandidatesIdWithSameNames("José");
 
             // Deve / Asserções
             Assert.NotEqual(candidatesSameName[0], candidatesSameName[1]);
@@ -114,8 +113,8 @@ namespace entra21_tests
             election.Vote(joseId);
 
             // Deve / Asserções
-            var candidateJose = election.Candidates.Find(x => x.id == joseId);
-            var candidateAna = election.Candidates.Find(x => x.id == anaId);
+            var candidateJose = election.Candidates.First(x => x.id == joseId);
+            var candidateAna = election.Candidates.First(x => x.id == anaId);
             Assert.Equal(2, candidateJose.votes);
             Assert.Equal(0, candidateAna.votes);
         }

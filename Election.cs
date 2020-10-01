@@ -10,7 +10,7 @@ namespace entra21_tests
         // Sempre em PascalCase
         private List<(Guid id, string name, int votes, string cpf)> candidates { get; set; }
 
-        private IReadOnlyCollection<(Guid id, string name, int votes, string cpf)> Candidates => candidates;
+        public IReadOnlyCollection<(Guid id, string name, int votes, string cpf)> Candidates => candidates;
         
         public bool CreateCandidates(List<(string name, string cpf)> candidateData, string password)
         {
@@ -36,8 +36,10 @@ namespace entra21_tests
             return Candidates.First(x => x.name == name).id;
         }
 
-         public List<(Guid id, string name, int votes, string cpf)> GetCandidatesIdWithSameNames(string name) => 
-            Candidates.Where(candidates => candidates.name == name).ToList();
+        public List<(Guid id, string name, int votes, string cpf)> GetCandidatesIdWithSameNames(string name)  
+        {
+            return Candidates.Where(candidates => candidates.name == name).ToList();
+        }
 
         public Guid GetCandidateIdByCPF(string cpf)
         {
