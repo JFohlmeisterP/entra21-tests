@@ -103,15 +103,17 @@ namespace entra21_tests
             Assert.Equal(result, expectedMessage);
         }
 
-        // [Theory]
-        // [InlineData()]
-        // public void lala(string[] sex, string[] answer, double[] expectedResult)
-        // {
-        //     var arrays = new ArraysExercises();
+        [Theory]
+        [InlineData(new string[4]{"F", "M", "M", "F"}, new string[4]{"SIM", "SIM", "NAO", "NAO"}, new double[4]{2, 2, 1, 1})]
+        [InlineData(new string[4]{"F", "F", "M", "F"}, new string[4]{"SIM", "SIM", "NAO", "NAO"}, new double[4]{2, 2, 2, 1})]
+        [InlineData(new string[4]{"M", "M", "M", "F"}, new string[4]{"NAO", "SIM", "NAO", "NAO"}, new double[4]{1, 3, 0, 2})]
+        public void deve_retornar_a_quantidade_de_respostas_positivas_e_negativas_em_geral_e_respostas_positivas_de_mulheres_e_negativas_de_homens(string[] sex, string[] answer, double[] expectedResult)
+        {
+            var arrays = new ArraysExercises();
 
-        //     var result = arrays.ExerciseArray3List2(sex, answer);
+            var result = arrays.ExerciseArray3List2(sex, answer);
 
-        //     Assert.Equal(result, expectedResult);   
-        // }
+            Assert.Equal(result, expectedResult);   
+        }
     }
 }

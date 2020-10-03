@@ -171,47 +171,48 @@ namespace entra21_tests
             return message;
         }
 
-        // public double[] ExerciseArray3List2(string[] sex, string[] answer)
-        // {
-        //     // Conforme inpu, retornar:
-        //     // • O número de pessoas que responderam sim;
-        //     // • O número de pessoas que responderam não;
-        //     // • A porcentagem de pessoas do sexo feminino que responderam sim;
-        //     // • A porcentagem de pessoas do sexo masculino que responderam não;
+        public double[] ExerciseArray3List2(string[] sex, string[] answer)
+        {
+            // Conforme inpu, retornar:
+            // • O número de pessoas que responderam sim;
+            // • O número de pessoas que responderam não;
+            // • A porcentagem de pessoas do sexo feminino que responderam sim;
+            // • A porcentagem de pessoas do sexo masculino que responderam não;
             
-        //     var yes = 0;
-        //     var no = 0;
-        //     var femaleYes = 0.0;
-        //     var maleNo = 0.0;
+            var yes = 0;
+            var no = 0;
+            var femaleYes = 0.0;
+            var maleNo = 0.0;
 
-        //     for(var i = 0; i < 10; i++)
-        //     {   
-        //         if (answer[i] == "SIM")
-        //         {
-        //             yes++;
-        //         }
-        //         else
-        //         {
-        //             no++;
-        //         }
+            for(var i = 0; i < sex.Length; i++)
+            {   
+                if (answer[i] == "SIM")
+                {
+                    yes++;
+                }
+                else
+                {
+                    no++;
+                }
 
-        //         if(sex[i] == "F" && answer[i] == "SIM")
-        //         {
-        //             femaleYes++;
-        //         }
-        //         else if(sex[i] == "M" && answer[i] == "NAO")
-        //         {
-        //             maleNo++;
-        //         }
-        //     }
+                if(sex[i] == "F" && answer[i] == "SIM")
+                {
+                    femaleYes++;
+                }
+                else if(sex[i] == "M" && answer[i] == "NAO")
+                {
+                    maleNo++;
+                }
+            }
 
-        //     var result = new double[];
+            var result = new double[4];
 
-        //     result[0] = yes;
-        //     result[1] = no;
-        //     result[2] = femaleYes;
-        //     result[3] = maleNo;
+            result[0] = yes;
+            result[1] = no;
+            result[2] = femaleYes;
+            result[3] = maleNo;
 
-        // }
+            return result;
+        }
     }
 }

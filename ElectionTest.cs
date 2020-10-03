@@ -11,10 +11,10 @@ namespace entra21_tests
         {
             // Dado / Setup
             var election = new Election();
-            var candidateData = new List<(string name, string cfp)>{("José", "009.923.970-14"), ("José", "852.710.650-73")};
+            var candidate = new List<Candidate> {new Candidate ("José", "009.923.970-14")};
 
             // Quando / Ação
-            var created = election.CreateCandidates(candidateData, "incorrect");
+            var created = election.CreateCandidates(candidate, "incorrect");
 
             // Deve / Asserções
             Assert.Null(election.Candidates);
@@ -24,20 +24,16 @@ namespace entra21_tests
         [Fact]
         public void should_create_candidates_when_password_is_correct()
         {
-            // Dado / Setup
-
-            // OBJETO election
             var election = new Election();
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
+            var candidates = new List<Candidate> {new Candidate ("José", "009.923.970-14"), new Candidate ("Ana", "852.710.650-73")};
 
-            var created = election.CreateCandidates(candidateData, "Pa$$w0rd");
+            var created = election.CreateCandidates(candidates, "Pa$$w0rd");
 
             var candidateJose = election.GetCandidateIdByName("José");
             var candidateAna = election.GetCandidateIdByName("Ana");
 
             Assert.True(created);
             
-            // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
             Assert.Equal(2, election.Candidates.Count);
             Assert.NotEqual(candidateJose, candidateAna);
         }
@@ -45,12 +41,9 @@ namespace entra21_tests
         [Fact]
         public void should_not_generate_same_id_for_both_candidates()
         {
-            // Dado / Setup
-
-            // OBJETO election
             var election = new Election();
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
-            election.CreateCandidates(candidateData, "Pa$$w0rd");
+            var candidates = new List<Candidate> {new Candidate ("José", "009.923.970-14"), new Candidate ("Ana", "852.710.650-73")};
+            election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
             var candidateJose = election.Candidates.ElementAt(0).id;
@@ -65,8 +58,8 @@ namespace entra21_tests
         {
            var election = new Election();
 
-           var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("José", "852.710.650-73")};
-           election.CreateCandidates(candidateData, "Pa$$w0rd");
+           var candidates = new List<Candidate> {new Candidate ("José", "009.923.970-14"), new Candidate ("José", "852.710.650-73")};
+           election.CreateCandidates(candidates, "Pa$$w0rd");
 
            var candidate = election.GetCandidateIdByCPF("852.710.650-73");
 
@@ -76,18 +69,13 @@ namespace entra21_tests
         [Fact]
         public void should_return_differents_id_for_same_names()
         {
-            // Dado / Setup
-
-            // OBJETO election
             var election = new Election();
 
-            var candidates = new List<(string name, string cpf)> { ("José", "123.456.761-00"), ("José", "856.876.32-23") };
+            var candidates = new List<Candidate> {new Candidate ("José", "009.923.970-14"), new Candidate ("José", "852.710.650-73")};
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
-            // Quando / Ação
             var candidatesSameName = election.GetCandidatesIdWithSameNames("José");
 
-            // Deve / Asserções
             Assert.NotEqual(candidatesSameName[0], candidatesSameName[1]);
         }
 
@@ -95,24 +83,21 @@ namespace entra21_tests
         [Fact]
         public void should_vote_twice_in_candidate_José()
         {
-            // Dado / Setup
-            // OBJETO election
             var election = new Election();
 
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
+            var jose = new Candidate ("José", "009.923.970-14");
+            var ana = new Candidate ("Ana", "852.710.650-73");
 
-            election.CreateCandidates(candidateData, "Pa$$w0rd");
+            var candidates = new List<Candidate>() {jose, ana};
 
-            var joseId = election.GetCandidateIdByName("José");
+            election.CreateCandidates(candidates, "Pa$$w0rd");
 
-            var anaId = election.GetCandidateIdByName("Ana");
+            var joseId = election.GetCandidateIdByName(jose.name);
+            var anaId = election.GetCandidateIdByName(ana.name);
 
-            // Quando / Ação
-            // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            election.Vote(joseId);
-            election.Vote(joseId);
+            jose.Vote();
+            jose.Vote();
 
-            // Deve / Asserções
             var candidateJose = election.Candidates.First(x => x.id == joseId);
             var candidateAna = election.Candidates.First(x => x.id == anaId);
             Assert.Equal(2, candidateJose.votes);
@@ -122,43 +107,45 @@ namespace entra21_tests
         [Fact]
         public void should_return_Ana_as_winner_when_only_Ana_receives_votes()
         {
-            // Dado / Setup
-            // OBJETO election
             var election = new Election();
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
-            election.CreateCandidates(candidateData, "Pa$$w0rd");
+
+            var ana = new Candidate ("Ana", "852.710.650-73");
+            var jose = new Candidate("José", "077.286.334-18");
+
+            var candidates = new List<Candidate>() {ana, jose};
+
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+
             var anaId = election.GetCandidateIdByName("Ana");
-            
-            // Quando / Ação
-            // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            election.Vote(anaId);
-            election.Vote(anaId);
+
+            ana.Vote();
+            ana.Vote();
+
             var winners = election.GetWinners();
 
-            // Deve / Asserções
             Assert.Equal(1, winners.Count);
             Assert.Equal(anaId, winners[0].id);
-            Assert.Equal(2, winners[0].votes);
         }
 
         [Fact]
         public void should_return_both_candidates_when_occurs_draw()
         {
-            // Dado / Setup
-            // OBJETO election
             var election = new Election();
-            var candidateData = new List<(string name, string cpf)>{("José", "009.923.970-14"), ("Ana", "852.710.650-73")};
-            election.CreateCandidates(candidateData, "Pa$$w0rd");
+        
+            var jose = new Candidate ("José", "009.923.970-14");
+            var ana = new Candidate ("Ana", "852.710.650-73");
+
+            var candidates = new List<Candidate> {jose, ana};
+
+            election.CreateCandidates(candidates, "Pa$$w0rd");
             var joseId = election.GetCandidateIdByName("José");
             var anaId = election.GetCandidateIdByName("Ana");
-            
-            // Quando / Ação
-            // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            election.Vote(anaId);
-            election.Vote(joseId);
+
+            ana.Vote();
+            jose.Vote();
+
             var winners = election.GetWinners();
 
-            // Deve / Asserções
             var candidateJose = winners.Find(x => x.id == joseId);
             var candidateAna = winners.Find(x => x.id == anaId);
             Assert.Equal(1, candidateJose.votes);

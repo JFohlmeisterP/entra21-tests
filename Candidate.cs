@@ -6,13 +6,24 @@ namespace entra21_tests
 {
     public class Candidate
     {
-        private Guid id {get; set;}
-        private string name {get; set;}
-        private string cpf {get; set;}
-        private int vote {get; set;}
+        public Guid id{ get; private set; }
+        public string name { get; private set; }
+        public string cpf { get; private set; }
+        public int votes { get; private set; }
 
+        public Candidate(string name, string cpf)
+        {
+            id = Guid.NewGuid();
+            this.name = name;
+            this.cpf = cpf;
+            this.votes = 0;
+        }
+
+        public void Vote()
+        {
+            votes++;
+        }
     }
-
     
 
 }

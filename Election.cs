@@ -8,18 +8,15 @@ namespace entra21_tests
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        private List<(Guid id, string name, int votes, string cpf)> candidates { get; set; }
+        private List<Candidate> candidates { get; set; }
 
-        public IReadOnlyCollection<(Guid id, string name, int votes, string cpf)> Candidates => candidates;
+        public IReadOnlyCollection<Candidate> Candidates => candidates;
         
-        public bool CreateCandidates(List<(string name, string cpf)> candidateData, string password)
+        public bool CreateCandidates(List<Candidate> candidateData, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                candidates = candidateData.Select(candidate => {
-                    return (Guid.NewGuid(), candidate.name, 0, candidate.cpf);
-                }).ToList();
-
+                candidates = candidateData;
                 return true;
             }
             else
@@ -27,39 +24,27 @@ namespace entra21_tests
                 return false;
             }
         }
-
-        // ToDo: Criar método que retorne um Guid que represente o candidato pesquisado por CPF
-
-        // ToDo: Este método deve retornar a lista de candidatos que tem o mesmo nome informado
+        
         public Guid GetCandidateIdByName(string name)
         {
-            return Candidates.First(x => x.name == name).id;
+            return candidates.First(x => x.name == name).id;
         }
 
-        public List<(Guid id, string name, int votes, string cpf)> GetCandidatesIdWithSameNames(string name)  
+        public List<Candidate> GetCandidatesIdWithSameNames(string name)  
         {
-            return Candidates.Where(candidates => candidates.name == name).ToList();
+            return candidates.Where(candidates => candidates.name == name).ToList();
         }
 
         public Guid GetCandidateIdByCPF(string cpf)
         {
-            return Candidates.First(x => x.cpf == cpf).id;
+            return candidates.First(x => x.cpf == cpf).id;
         }
 
-        public void Vote(Guid id)
+        public List<Candidate> GetWinners()
         {
-            candidates = Candidates.Select(candidate => {
-                return candidate.id == id
-                    ? (candidate.id, candidate.name, candidate.votes + 1, candidate.cpf)
-                    : candidate;
-            }).ToList();
-        }
+            var winners = new List<Candidate>{candidates[0]};
 
-        public List<(Guid id, string name, int votes, string cpf)> GetWinners()
-        {
-            var winners = new List<(Guid id, string name, int votes, string cpf)>{candidates[0]};
-
-            for (int i = 1; i < Candidates.Count; i++)
+            for (int i = 1; i < candidates.Count; i++)
             {
                 if (candidates[i].votes > winners[0].votes)
                 {
