@@ -258,20 +258,6 @@ namespace Test
             // Deve / Asserções
             Assert.Equal(total, valorEsperado);
         }
-
-        [Theory]
-        [InlineData(new int[10]{1,2,3,4,5,6,7,8,9,10}, new int[10]{5,10,15,20,25,30,35,40,45,50})]
-        public void deve_retornar_uma_lista_do_resultado_do_input_multiplicado_por_5(int[] numbers, int[] resultadoEsperado)
-        {
-            // Dado / Setup
-            var exercises = new Exercises();
-            
-            // Quando / Ação
-            var result = exercises.ExerciseTesteSelect(numbers);
-
-            // Deve / Asserções
-            Assert.Equal(result, resultadoEsperado);
-        }
     
     }
 }
