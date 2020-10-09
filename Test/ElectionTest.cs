@@ -6,7 +6,7 @@ using Domain;
 namespace Test
 {
     public class ElectionTest
-    {
+    {   
         [Fact]
         public void should_not_create_candidates_when_password_is_incorrect()
         {
