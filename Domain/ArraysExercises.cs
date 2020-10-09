@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace entra21_tests
+namespace Domain
 {
-    class ArraysExercises
+    public class ArraysExercises
     {
         public IEnumerable<int> ExerciseArray1(int[] a, int [] b)
         {
