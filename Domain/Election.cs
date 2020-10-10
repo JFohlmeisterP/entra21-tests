@@ -24,20 +24,32 @@ namespace Domain
                 return false;
             }
         }
+
+        public bool Vote(string cpf)
+        {
+            var candidate = candidates.FirstOrDefault(x => x.Cpf == cpf);
+            if(candidate == null)
+            {
+                return false;
+            }
+
+            candidate.Vote();
+            return true;
+        }
         
         public Guid GetCandidateIdByName(string name)
         {
-            return candidates.First(x => x.name == name).id;
+            return candidates.First(x => x.Name == name).Id;
         }
 
         public List<Candidate> GetCandidatesIdWithSameNames(string name)  
         {
-            return candidates.Where(candidates => candidates.name == name).ToList();
+            return candidates.Where(candidates => candidates.Name == name).ToList();
         }
 
         public Guid GetCandidateIdByCPF(string cpf)
         {
-            return candidates.First(x => x.cpf == cpf).id;
+            return candidates.First(x => x.Cpf == cpf).Id;
         }
 
         public List<Candidate> GetWinners()
@@ -46,12 +58,12 @@ namespace Domain
 
             for (int i = 1; i < candidates.Count; i++)
             {
-                if (candidates[i].votes > winners[0].votes)
+                if (candidates[i].Votes > winners[0].Votes)
                 {
                     winners.Clear();
                     winners.Add(candidates[i]);
                 }
-                else if (candidates[i].votes == winners[0].votes)
+                else if (candidates[i].Votes == winners[0].Votes)
                 {
                     winners.Add(candidates[i]);
                 }

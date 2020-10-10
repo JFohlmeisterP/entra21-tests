@@ -47,8 +47,8 @@ namespace Test
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
-            var candidateJose = election.Candidates.ElementAt(0).id;
-            var candidateAna = election.Candidates.ElementAt(1).id;
+            var candidateJose = election.Candidates.ElementAt(0).Id;
+            var candidateAna = election.Candidates.ElementAt(1).Id;
 
             // Deve / Asserções
             Assert.NotEqual(candidateAna, candidateJose);
@@ -64,7 +64,7 @@ namespace Test
 
            var candidate = election.GetCandidateIdByCPF("852.710.650-73");
 
-           Assert.Equal(candidate, election.Candidates.ElementAt(1).id);
+           Assert.Equal(candidate, election.Candidates.ElementAt(1).Id);
         }
 
         [Fact]
@@ -93,16 +93,36 @@ namespace Test
 
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
-            var joseId = election.GetCandidateIdByName(jose.name);
-            var anaId = election.GetCandidateIdByName(ana.name);
+            var joseId = election.GetCandidateIdByName(jose.Name);
+            var anaId = election.GetCandidateIdByName(ana.Name);
 
             jose.Vote();
             jose.Vote();
 
-            var candidateJose = election.Candidates.First(x => x.id == joseId);
-            var candidateAna = election.Candidates.First(x => x.id == anaId);
-            Assert.Equal(2, candidateJose.votes);
-            Assert.Equal(0, candidateAna.votes);
+            var candidateJose = election.Candidates.First(x => x.Id == joseId);
+            var candidateAna = election.Candidates.First(x => x.Id == anaId);
+            Assert.Equal(2, candidateJose.Votes);
+            Assert.Equal(0, candidateAna.Votes);
+        }
+
+        [Fact]
+        public void Should_return_false_and_not_vote_when_CPF_is_invalid()
+        {
+            // Dado / Setup
+            // OBJETO election
+            var election = new Election();
+            var Jose = new Candidate("José", "895.456.214-78");
+            var candidates = new List<Candidate>{Jose};
+
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+
+            // Quando / Ação
+            var voteResult = election.Vote("1321");
+
+            // Deve / Asserções
+            var candidateJose = election.Candidates.First(x => x.Id == Jose.Id);
+            Assert.Equal(0, candidateJose.Votes);
+            Assert.False(voteResult);
         }
 
         [Fact]
@@ -125,7 +145,7 @@ namespace Test
             var winners = election.GetWinners();
 
             Assert.Equal(1, winners.Count);
-            Assert.Equal(anaId, winners[0].id);
+            Assert.Equal(anaId, winners[0].Id);
         }
 
         [Fact]
@@ -147,10 +167,10 @@ namespace Test
 
             var winners = election.GetWinners();
 
-            var candidateJose = winners.Find(x => x.id == joseId);
-            var candidateAna = winners.Find(x => x.id == anaId);
-            Assert.Equal(1, candidateJose.votes);
-            Assert.Equal(1, candidateAna.votes);
+            var candidateJose = winners.Find(x => x.Id == joseId);
+            var candidateAna = winners.Find(x => x.Id == anaId);
+            Assert.Equal(1, candidateJose.Votes);
+            Assert.Equal(1, candidateAna.Votes);
         }
     }
 }
