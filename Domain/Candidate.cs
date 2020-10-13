@@ -28,8 +28,10 @@ namespace Domain
             {
                 return false;
             }
-            
-            if (!Name.All(char.IsLetter))
+
+            var name = Name.Replace(" ", "");
+
+            if (!name.All(char.IsLetter))
             {
                 return false;
             }
