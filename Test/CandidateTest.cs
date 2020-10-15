@@ -75,17 +75,17 @@ namespace Test
         }
 
         [Theory]
-        [InlineData(null)]//ok
-        [InlineData("")]//ok
-        [InlineData(" ")]//ok
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
         //[InlineData("Armando")]
-        //[InlineData(" Armando")]//ok
-        //[InlineData("Armando ")]//ok
-        //[InlineData("Armando  ")]//ok
+        [InlineData(" Armando")]
+        [InlineData("Armando ")]
+        [InlineData("Armando  ")]
         //[InlineData("Armando d")]
-        //[InlineData("Armando 9")]// ok
-        //[InlineData("Armando9 Oliveira")]
-        //[InlineData("Armando Oliveira Mendes8")]
+        [InlineData("Armando 9")]
+        [InlineData("Armando9 Oliveira")]
+        [InlineData("Armando Oliveira Mendes8")]
         public void Should_return_false_when_name_is_invalid(string name)
         {
             // Dado / Setup
