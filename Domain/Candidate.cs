@@ -24,39 +24,58 @@ namespace Domain
 
         public bool Validate()
         {
+            //Validação Nome
+
+            bool isValid = true;
+
             if (string.IsNullOrEmpty(Name))
             {
-                return false;
+                return !isValid;
             }
 
-            var name = Name.Replace(" ", "");
+            var name = Name;
 
-            if (!name.All(char.IsLetter))
+            for (var i = 0; i < name.Length; i++)
             {
-                return false;
+                var charInName = name[i];
+                if (charInName.Equals(" "))
+                {
+                    return !isValid;
+                }
             }
             
+            if (!name.All(char.IsLetter))
+            {
+                return !isValid;
+            }
+            else if (!name.All(char.IsNumber))
+            {
+                return !isValid;
+            }
+            
+            // Validação CPF
+
             if (string.IsNullOrEmpty(Cpf))
             {
-                return false;
+                return !isValid;
             }
 
             var cpf = Cpf.Replace(".", "").Replace("-", "");
             
             if (cpf.Length != 11)
             {
-                return false;
+                return !isValid;
             }
 
             if (!cpf.All(char.IsNumber))
             {
-                return false;
+                return !isValid;
             }
 
-            var first = cpf[0];
-            if (cpf.Substring(1, 11).All(x => x == first))
+            var firstcpf = cpf[0];
+            if (cpf.Substring(1, 11).All(x => x == firstcpf))
             {
-                return false;
+                return !isValid;
             }
             
             // Validação CPF
@@ -97,11 +116,12 @@ namespace Domain
 
             if (cpf.EndsWith(digit))
             {
-                return true;
+                return isValid;
             }
 
-            return false;
+            return !isValid;
 
         }
+
     }  
 }
